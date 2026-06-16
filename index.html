@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vila Pet Calegaris - Estética Animal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="src/logo.png" type="image/png" />
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts: Inter & Fredoka (for friendly headings) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "vp-yellow": "#f4e55d", // Primary highlight
+              "vp-dark": "#221d10", // Main text
+              "vp-teal": "#50a9ac", // Primary brand color
+              "vp-gold-light": "#e2b54d",
+              "vp-gold-dark": "#a08c43",
+              "vp-green-light": "#ecf7e5", // Background soft
+              "vp-yellow-light": "#f1eb82",
+              "vp-brown": "#5a4c20", // Secondary text
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              heading: ["Fredoka", "sans-serif"],
+            },
+            boxShadow: {
+              soft: "0 10px 40px -10px rgba(0,0,0,0.08)",
+              floating: "0 20px 40px -10px rgba(80,169,172,0.15)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom styles for smooth scrolling and minor tweaks */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: #fafafa; /* Very light neutral bg */
+      }
+
+      .hero-bg {
+        position: relative;
+        background-image: url("src/cachorro.jpeg");
+        background-size: cover;
+        background-position: center 10%;
+      }
+
+      @media (min-width: 1024px) {
+        .hero-bg {
+          background-position: center 15%; /* Ajuste fino para desktop */
+        }
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(34, 29, 16, 0.85) 0%,
+          rgba(80, 169, 172, 0.7) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+      }
+
+      /* Custom styling for file inputs to look nicer */
+      input[type="checkbox"],
+      input[type="radio"] {
+        accent-color: #50a9ac;
+      }
+
+      /* Blob shape for image section */
+      .blob-shape {
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        overflow: hidden;
+        animation: morph 8s ease-in-out infinite;
+      }
+
+      @keyframes morph {
+        0%,
+        100% {
+          border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        34% {
+          border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        }
+        67% {
+          border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        }
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  </head>
+  <body class="font-sans text-vp-dark antialiased">
+    <!-- Navigation -->
+    <nav
+      class="bg-white/95 backdrop-blur-md shadow-sm fixed w-full z-50 top-0 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-24">
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center">
+            <img
+              class="h-20 w-auto object-contain drop-shadow-sm transition-transform hover:scale-105"
+              src="src/logo.png"
+              alt="Vila Pet Calegaris Logo"
+            />
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex space-x-8 items-center">
+            <a
+              href="#servicos"
+              class="text-vp-dark hover:text-vp-teal transition-colors font-medium"
+              >Serviços</a
+            >
+            <a
+              href="#estrutura"
+              class="text-vp-dark hover:text-vp-teal transition-colors font-medium"
+              >Nossa Estrutura</a
+            >
+            <a
+              href="#agendamento"
+              class="bg-vp-teal text-white px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              >Agendar Horário</a
+            >
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center">
+            <button
+              id="mobile-menu-btn"
+              class="text-vp-teal hover:text-vp-dark focus:outline-none p-2"
+            >
+              <i class="fas fa-bars text-3xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Panel -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg"
+      >
+        <div class="px-4 pt-2 pb-6 space-y-2">
+          <a
+            href="#servicos"
+            class="block px-3 py-3 text-vp-dark font-medium hover:bg-vp-green-light hover:text-vp-teal rounded-lg"
+            >Serviços</a
+          >
+          <a
+            href="#estrutura"
+            class="block px-3 py-3 text-vp-dark font-medium hover:bg-vp-green-light hover:text-vp-teal rounded-lg"
+            >Nossa Estrutura</a
+          >
+          <a
+            href="#agendamento"
+            class="block w-full text-center mt-4 bg-vp-teal text-white px-4 py-3 rounded-full font-semibold shadow-md"
+            >Agendar Horário</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg min-h-screen flex items-center justify-center pt-24">
+      <div class="hero-overlay"></div>
+      <div
+        class="hero-content text-center px-4 max-w-5xl mx-auto flex flex-col items-center"
+      >
+        <div
+          class="inline-block mb-6 px-4 py-1.5 rounded-full border border-vp-yellow/30 bg-vp-dark/30 backdrop-blur-sm text-vp-yellow text-sm font-medium tracking-wide uppercase"
+        >
+          Estética Animal de Excelência
+        </div>
+
+        <h1
+          class="font-heading text-5xl md:text-7xl font-semibold text-white mb-6 leading-tight drop-shadow-md"
+        >
+          O Cuidado que seu <br class="hidden md:block" />
+          <span class="text-vp-yellow">Pet Merece!</span>
+        </h1>
+
+        <p
+          class="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl font-light drop-shadow"
+        >
+          Banho, tosa e muito amor no coração do Jardim Calegaris. Ambiente
+          seguro e profissionais qualificados.
+        </p>
+
+        <div
+          class="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto"
+        >
+          <a
+            href="#agendamento"
+            class="bg-vp-yellow text-vp-dark text-lg px-8 py-4 rounded-full font-bold hover:bg-[#eadd4b] transition-all shadow-lg transform hover:-translate-y-1 flex items-center justify-center"
+          >
+            <i class="fab fa-whatsapp text-2xl mr-2"></i> Agendar Agora
+          </a>
+          <a
+            href="#servicos"
+            class="bg-white/10 backdrop-blur-md text-white border border-white/30 text-lg px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-vp-teal transition-all shadow-lg text-center"
+          >
+            Ver Serviços
+          </a>
+        </div>
+
+        <!-- Trust badges below hero -->
+        <div
+          class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-white/80 text-sm font-medium"
+        >
+          <div class="flex items-center justify-center gap-2">
+            <i class="fas fa-heart text-vp-yellow"></i> Feito com Amor
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fas fa-shield-alt text-vp-yellow"></i> Ambiente Seguro
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fas fa-medal text-vp-yellow"></i> Profissionais
+            Qualificados
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <i class="fas fa-car text-vp-yellow"></i> Taxi Dog Disponível
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Welcome / Info Banner -->
+    <div
+      class="bg-vp-teal text-white py-12 relative z-20 -mt-6 rounded-t-[3rem] shadow-[0_-10px_40px_rgba(0,0,0,0.1)]"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8"
+      >
+        <div class="md:w-1/2">
+          <h2
+            class="font-heading text-3xl md:text-4xl font-semibold mb-4 text-vp-yellow"
+          >
+            Bem-vindo à Vila Pet
+          </h2>
+          <p class="text-lg text-white/90 leading-relaxed">
+            Nossa missão é proporcionar bem-estar e beleza para o seu melhor
+            amigo. Utilizamos produtos de alta qualidade e técnicas modernas de
+            tosa para garantir que seu pet saia não apenas lindo, mas também
+            feliz e relaxado.
+          </p>
+        </div>
+        <div class="md:w-1/2 flex justify-center md:justify-end">
+          <!-- Using the facade image in a stylized way -->
+          <div
+            class="w-64 h-64 blob-shape border-4 border-vp-yellow/50 shadow-2xl overflow-hidden relative"
+          >
+            <img
+              src="src/fachada.jpeg"
+              alt="Fachada Vila Pet"
+              class="w-full h-full object-cover absolute inset-0"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-24 bg-[#fafafa]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+          <h4
+            class="text-vp-gold-dark font-bold tracking-wider uppercase text-sm mb-2"
+          >
+            O que fazemos
+          </h4>
+          <h2
+            class="font-heading text-4xl md:text-5xl font-semibold text-vp-dark mb-6"
+          >
+            Nossos Serviços Especiais
+          </h2>
+          <p class="text-vp-brown text-lg">
+            Tudo o que seu pet precisa em um só lugar, com o cuidado e a atenção
+            que ele merece.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Service Card 1 -->
+          <div
+            class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-vp-green-light rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"
+            ></div>
+            <div
+              class="w-16 h-16 bg-vp-teal/10 rounded-2xl flex items-center justify-center text-vp-teal text-3xl mb-6 relative z-10"
+            >
+              <i class="fas fa-shower"></i>
+            </div>
+            <h3
+              class="font-heading text-2xl font-semibold text-vp-dark mb-4 relative z-10"
+            >
+              Banhos & Hidratações
+            </h3>
+            <p class="text-gray-600 leading-relaxed relative z-10">
+              Banhos relaxantes com shampoos específicos para cada tipo de
+              pelagem. Hidratações profundas para devolver brilho e maciez ao
+              pelo.
+            </p>
+          </div>
+
+          <!-- Service Card 2 -->
+          <div
+            class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-vp-yellow-light/40 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"
+            ></div>
+            <div
+              class="w-16 h-16 bg-vp-yellow/20 rounded-2xl flex items-center justify-center text-vp-gold-dark text-3xl mb-6 relative z-10"
+            >
+              <i class="fas fa-cut"></i>
+            </div>
+            <h3
+              class="font-heading text-2xl font-semibold text-vp-dark mb-4 relative z-10"
+            >
+              Tosas Variadas
+            </h3>
+            <ul class="text-gray-600 space-y-3 relative z-10">
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Tosa na
+                Máquina
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Tosa na
+                Tesoura (Acabamento perfeito)
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Tosa Bebê
+                (Fofura garantida)
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Tosa
+                Higiênica (Saúde e limpeza)
+              </li>
+            </ul>
+          </div>
+
+          <!-- Service Card 3 -->
+          <div
+            class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-vp-teal/10 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"
+            ></div>
+            <div
+              class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center text-vp-dark text-3xl mb-6 relative z-10"
+            >
+              <i class="fas fa-paw"></i>
+            </div>
+            <h3
+              class="font-heading text-2xl font-semibold text-vp-dark mb-4 relative z-10"
+            >
+              Cuidados Extras
+            </h3>
+            <ul class="text-gray-600 space-y-3 relative z-10">
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Corte de
+                Unhas Seguro
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Remoção de
+                Sub Pelo (Desembolo)
+              </li>
+              <li class="flex items-start">
+                <i class="fas fa-check text-vp-teal mt-1 mr-3"></i> Limpeza de
+                Ouvidos
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Promotion Banner -->
+        <div
+          class="mt-20 bg-vp-teal rounded-[2rem] overflow-hidden shadow-floating relative"
+        >
+          <!-- Background Pattern -->
+          <div
+            class="absolute inset-0 opacity-10"
+            style="
+              background-image: radial-gradient(#fff 2px, transparent 2px);
+              background-size: 30px 30px;
+            "
+          ></div>
+
+          <div
+            class="relative p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-10"
+          >
+            <div class="text-white md:w-2/3 z-10">
+              <div
+                class="inline-block bg-vp-yellow text-vp-dark font-bold px-4 py-1 rounded-full text-sm mb-6 shadow-sm"
+              >
+                <i class="fas fa-star mr-1"></i> Mais Vendido
+              </div>
+              <h3 class="font-heading text-3xl md:text-4xl font-semibold mb-4">
+                Pacote Mensal Especial
+              </h3>
+              <p class="text-lg mb-6 text-vp-green-light">
+                A melhor forma de manter seu pet sempre limpo, cheiroso e
+                saudável, com economia garantida.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                <div
+                  class="bg-white/10 rounded-xl p-4 border border-white/20 text-center"
+                >
+                  <span class="block text-3xl font-bold text-vp-yellow mb-1"
+                    >4</span
+                  >
+                  <span class="text-sm uppercase tracking-wider">Banhos</span>
+                </div>
+                <div
+                  class="bg-white/10 rounded-xl p-4 border border-white/20 text-center"
+                >
+                  <span class="block text-3xl font-bold text-vp-yellow mb-1"
+                    >2</span
+                  >
+                  <span class="text-sm uppercase tracking-wider"
+                    >Tosas Higiênicas</span
+                  >
+                </div>
+                <div
+                  class="bg-white/10 rounded-xl p-4 border border-white/20 text-center"
+                >
+                  <span class="block text-3xl font-bold text-vp-yellow mb-1"
+                    >3</span
+                  >
+                  <span class="text-sm uppercase tracking-wider"
+                    >Hidratações</span
+                  >
+                </div>
+              </div>
+
+              <div
+                class="flex items-start bg-vp-dark/40 rounded-xl p-4 border border-vp-dark/50"
+              >
+                <i class="fas fa-info-circle text-vp-yellow mt-1 mr-3"></i>
+                <p class="text-sm text-gray-200">
+                  Ganhe
+                  <strong class="text-vp-yellow">5% de desconto</strong> no
+                  banho para pagamento no PIX (trazendo o panfleto).
+                </p>
+              </div>
+            </div>
+
+            <div class="md:w-1/3 text-center z-10 w-full">
+              <a
+                href="#agendamento"
+                class="block w-full bg-vp-yellow text-vp-dark text-xl px-8 py-5 rounded-2xl font-bold hover:bg-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                Consultar Valores Agora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Structure/Gallery Section -->
+    <section id="estrutura" class="py-24 bg-vp-green-light relative">
+      <!-- Decorative element -->
+      <div
+        class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-[#fafafa] to-transparent"
+      ></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+          <h4
+            class="text-vp-teal font-bold tracking-wider uppercase text-sm mb-2"
+          >
+            Conheça nosso espaço
+          </h4>
+          <h2
+            class="font-heading text-4xl md:text-5xl font-semibold text-vp-dark mb-6"
+          >
+            Nossa Estrutura
+          </h2>
+          <p class="text-vp-brown text-lg">
+            Um ambiente climatizado, higienizado rigorosamente e projetado para
+            o conforto e segurança do seu animalzinho.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card Imagem 1 -->
+          <div
+            class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
+          >
+            <img
+              src="src/interno2.jpeg"
+              alt="Área principal de Banho e Tosa"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-vp-dark/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 p-6 w-full opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <p class="text-white font-semibold text-xl mb-1">
+                Área de Banho Ampla
+              </p>
+              <div class="w-12 h-1 bg-vp-yellow rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Card Imagem 2 -->
+          <div
+            class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
+          >
+            <img
+              src="src/interno1.jpeg"
+              alt="Recepção Vila Pet"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-vp-dark/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 p-6 w-full opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <p class="text-white font-semibold text-xl mb-1">
+                Recepção Acolhedora
+              </p>
+              <div class="w-12 h-1 bg-vp-yellow rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Card Imagem 3 -->
+          <div
+            class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
+          >
+            <img
+              src="src/interno3.jpeg"
+              alt="Equipamentos de Secagem"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-vp-dark/90 via-transparent to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 p-6 w-full opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+            >
+              <p class="text-white font-semibold text-xl mb-1">
+                Equipamentos Modernos
+              </p>
+              <div class="w-12 h-1 bg-vp-yellow rounded-full"></div>
+            </div>
+          </div>
+
+          <!-- Bloco de Higiene Ocupando as 3 Colunas Abaixo -->
+          <div
+            class="md:col-span-3 bg-white rounded-[2rem] shadow-md p-8 md:p-12 flex flex-col md:flex-row items-center border border-gray-100 mt-4 gap-8 hover:shadow-lg transition-shadow"
+          >
+            <div
+              class="md:w-1/3 flex flex-col items-center md:items-start text-center md:text-left"
+            >
+              <div
+                class="w-20 h-20 bg-vp-green-light rounded-2xl flex items-center justify-center text-vp-teal text-4xl mb-4"
+              >
+                <i class="fas fa-pump-soap"></i>
+              </div>
+              <h3 class="font-heading text-3xl font-semibold text-vp-dark">
+                Higiene em 1º Lugar
+              </h3>
+            </div>
+            <div
+              class="md:w-2/3 md:border-l-2 md:border-gray-100 md:pl-10 text-center md:text-left"
+            >
+              <p class="text-gray-600 text-lg leading-relaxed">
+                A saúde do seu pet é nossa prioridade. Utilizamos toalhas
+                individuais e rigorosamente esterilizadas. Nosso ambiente é
+                dedetizado regularmente e todos os materiais e equipamentos são
+                limpos e desinfetados a cada novo uso para garantir a segurança
+                do seu melhor amigo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="agendamento" class="py-24 bg-[#fafafa]">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="font-heading text-4xl md:text-5xl font-semibold text-vp-dark mb-4"
+          >
+            Vamos Agendar?
+          </h2>
+          <p class="text-vp-brown text-lg max-w-2xl mx-auto">
+            Preencha os dados abaixo rapidamente e finalize seu pedido
+            diretamente no nosso WhatsApp.
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-[2.5rem] shadow-floating overflow-hidden flex flex-col lg:flex-row border border-gray-100"
+        >
+          <!-- Left side Info Panel -->
+          <div
+            class="bg-vp-teal relative overflow-hidden lg:w-2/5 p-10 md:p-14 flex flex-col justify-between text-white"
+          >
+            <!-- Decor abstract shapes -->
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-20 -mt-20"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 w-40 h-40 bg-vp-dark opacity-10 rounded-full -ml-10 -mb-10"
+            ></div>
+
+            <div class="relative z-10">
+              <h3 class="font-heading text-3xl font-semibold mb-6">
+                Contato Rápido
+              </h3>
+              <p class="mb-10 text-vp-green-light opacity-90 leading-relaxed">
+                Sua mensagem será enviada diretamente para nossa equipe.
+                Responderemos o mais breve possível para confirmar seu horário.
+              </p>
+
+              <div class="space-y-8">
+                <div class="flex items-start group">
+                  <div
+                    class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mr-5 flex-shrink-0 group-hover:bg-vp-yellow transition-colors duration-300 group-hover:text-vp-dark"
+                  >
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-vp-yellow mb-1">
+                      Nosso Endereço
+                    </h4>
+                    <p class="text-sm opacity-90">
+                      R. Oscar Seixas de Queiroz, 435<br />Jardim Calegaris
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start group">
+                  <div
+                    class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mr-5 flex-shrink-0 group-hover:bg-vp-yellow transition-colors duration-300 group-hover:text-vp-dark"
+                  >
+                    <i class="fab fa-whatsapp text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-vp-yellow mb-1">WhatsApp</h4>
+                    <p class="text-lg font-bold">(19) 99321-7046</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start group">
+                  <div
+                    class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mr-5 flex-shrink-0 group-hover:bg-vp-yellow transition-colors duration-300 group-hover:text-vp-dark"
+                  >
+                    <i class="fab fa-instagram text-xl"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-vp-yellow mb-1">Instagram</h4>
+                    <p class="text-sm opacity-90">@vilapet_calegaris</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Taxi Dog Highlight inside info panel -->
+            <div
+              class="mt-12 bg-vp-dark/30 backdrop-blur-sm p-6 rounded-2xl border border-white/10 relative z-10"
+            >
+              <div class="flex items-center mb-3">
+                <div
+                  class="w-10 h-10 bg-vp-yellow text-vp-dark rounded-full flex items-center justify-center mr-3"
+                >
+                  <i class="fas fa-taxi text-lg"></i>
+                </div>
+                <h4 class="font-bold text-lg text-vp-yellow">
+                  Taxi Dog Exclusivo
+                </h4>
+              </div>
+              <p class="text-sm text-gray-300">
+                Sem tempo? Nós buscamos e levamos seu pet com total segurança e
+                conforto. Consulte as taxas para o seu bairro na hora do
+                agendamento.
+              </p>
+            </div>
+          </div>
+
+          <!-- Right side Form -->
+          <div class="p-10 md:p-14 lg:w-3/5 bg-white">
+            <form id="whatsappForm" class="space-y-6">
+              <!-- Client & Pet Info -->
+              <div class="space-y-6">
+                <div>
+                  <label
+                    for="clienteNome"
+                    class="block text-sm font-semibold text-gray-700 mb-2"
+                    >Seu Nome *</label
+                  >
+                  <input
+                    type="text"
+                    id="clienteNome"
+                    required
+                    class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-vp-teal focus:border-vp-teal transition-all outline-none"
+                    placeholder="Ex: Maria Silva"
+                  />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="petNome"
+                      class="block text-sm font-semibold text-gray-700 mb-2"
+                      >Nome do Pet *</label
+                    >
+                    <input
+                      type="text"
+                      id="petNome"
+                      required
+                      class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-vp-teal focus:border-vp-teal transition-all outline-none"
+                      placeholder="Ex: Rex"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="petPorte"
+                      class="block text-sm font-semibold text-gray-700 mb-2"
+                      >Porte do Pet *</label
+                    >
+                    <div class="relative">
+                      <select
+                        id="petPorte"
+                        required
+                        class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 focus:bg-white focus:ring-2 focus:ring-vp-teal focus:border-vp-teal transition-all outline-none appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected>
+                          Selecione o porte...
+                        </option>
+                        <option value="Pequeno">Pequeno (Até 10kg)</option>
+                        <option value="Médio">Médio (11kg a 25kg)</option>
+                        <option value="Grande">Grande (26kg a 40kg)</option>
+                        <option value="Gigante">Gigante (+40kg)</option>
+                      </select>
+                      <div
+                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-gray-500"
+                      >
+                        <i class="fas fa-chevron-down text-sm"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Services Selection -->
+              <div class="pt-4">
+                <label class="block text-sm font-semibold text-gray-700 mb-3"
+                  >Quais serviços ele precisa hoje? *</label
+                >
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <!-- Custom Checkbox styling -->
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Banho"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Banho</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Tosa Higiênica"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Tosa Higiênica</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Tosa na Máquina"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Tosa na Máquina</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Tosa na Tesoura"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Tosa na Tesoura</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Hidratação"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Hidratação</span
+                    >
+                  </label>
+                  <label
+                    class="flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-green-light transition-colors group"
+                  >
+                    <input
+                      type="checkbox"
+                      name="servico"
+                      value="Desembolo / Sub Pelo"
+                      class="w-5 h-5 rounded text-vp-teal focus:ring-vp-teal border-gray-300"
+                    />
+                    <span
+                      class="ml-3 text-gray-700 group-hover:text-vp-dark font-medium"
+                      >Desembolo</span
+                    >
+                  </label>
+                </div>
+                <p
+                  id="servicoError"
+                  class="text-red-500 text-sm mt-2 hidden flex items-center"
+                >
+                  <i class="fas fa-exclamation-circle mr-1"></i> Selecione pelo
+                  menos um serviço.
+                </p>
+              </div>
+
+              <!-- Taxi Dog Logic -->
+              <div class="border-t border-gray-100 pt-6 mt-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-4"
+                  >Gostaria de utilizar o Taxi Dog?</label
+                >
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <label
+                    class="flex-1 flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-colors relative"
+                    id="lbl-taxi-nao"
+                  >
+                    <input
+                      type="radio"
+                      name="taxidog"
+                      value="nao"
+                      class="w-5 h-5"
+                      checked
+                      onclick="toggleAddress(false)"
+                    />
+                    <span class="ml-3 font-medium text-gray-700"
+                      >Não, eu levo meu pet.</span
+                    >
+                  </label>
+                  <label
+                    class="flex-1 flex items-center p-4 border border-gray-200 rounded-xl cursor-pointer hover:bg-vp-yellow-light/20 transition-colors relative"
+                    id="lbl-taxi-sim"
+                  >
+                    <input
+                      type="radio"
+                      name="taxidog"
+                      value="sim"
+                      class="w-5 h-5"
+                      onclick="toggleAddress(true)"
+                    />
+                    <span class="ml-3 font-medium text-gray-700"
+                      >Sim, busquem em casa!</span
+                    >
+                  </label>
+                </div>
+              </div>
+
+              <!-- Address Field (Hidden by default) -->
+              <div
+                id="enderecoField"
+                class="hidden transition-all duration-300 opacity-0 h-0 overflow-hidden bg-vp-yellow-light/30 p-5 rounded-xl border border-vp-yellow/50 mt-4"
+              >
+                <label
+                  for="endereco"
+                  class="block text-sm font-semibold text-vp-dark mb-2"
+                  >Qual endereço para busca? *</label
+                >
+                <textarea
+                  id="endereco"
+                  rows="2"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white focus:ring-2 focus:ring-vp-teal focus:border-vp-teal transition-all outline-none resize-none"
+                  placeholder="Rua, Número, Bairro. Algum ponto de referência?"
+                ></textarea>
+                <p class="text-xs text-vp-brown mt-2 flex items-center">
+                  <i class="fas fa-info-circle mr-1"></i> A taxa de deslocamento
+                  será informada no WhatsApp.
+                </p>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-6">
+                <button
+                  type="button"
+                  onclick="sendToWhatsApp()"
+                  class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-5 px-8 rounded-2xl shadow-[0_10px_20px_rgba(37,211,102,0.3)] transition-all duration-300 transform hover:-translate-y-1 flex justify-center items-center text-lg group"
+                >
+                  <i
+                    class="fab fa-whatsapp text-3xl mr-3 group-hover:scale-110 transition-transform"
+                  ></i>
+                  Enviar pelo WhatsApp
+                </button>
+                <p class="text-center text-sm text-gray-500 mt-4">
+                  Você será redirecionado para o WhatsApp com os dados
+                  preenchidos.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-vp-dark text-white pt-16 pb-8 border-t-[12px] border-vp-teal relative"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center md:items-start mb-12"
+        >
+          <!-- Brand -->
+          <div
+            class="text-center md:text-left flex flex-col items-center md:items-start"
+          >
+            <img
+              src="src/logo.png"
+              alt="Logo Vila Pet"
+              class="h-24 w-auto rounded-xl bg-white p-1 mb-4"
+            />
+            <h2 class="font-heading text-2xl font-semibold text-vp-yellow mb-2">
+              Vila Pet Calegaris
+            </h2>
+            <p class="text-gray-400 text-sm">
+              Onde o amor pelos animais encontra a estética profissional.
+            </p>
+          </div>
+
+          <!-- Links -->
+          <div class="text-center md:text-left">
+            <h4
+              class="font-heading text-xl text-white mb-6 border-b border-gray-700 pb-2 inline-block"
+            >
+              Navegação
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-vp-yellow transition-colors"
+                  >Início</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#servicos"
+                  class="text-gray-400 hover:text-vp-yellow transition-colors"
+                  >Serviços</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#estrutura"
+                  class="text-gray-400 hover:text-vp-yellow transition-colors"
+                  >Estrutura</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#agendamento"
+                  class="text-gray-400 hover:text-vp-yellow transition-colors"
+                  >Agendamento</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div class="text-center md:text-left">
+            <h4
+              class="font-heading text-xl text-white mb-6 border-b border-gray-700 pb-2 inline-block"
+            >
+              Fale Conosco
+            </h4>
+            <div class="space-y-4 text-gray-400">
+              <a
+                href="https://wa.me/5519993217046"
+                target="_blank"
+                class="flex items-center justify-center md:justify-start hover:text-vp-yellow transition-colors group"
+              >
+                <i
+                  class="fab fa-whatsapp text-xl mr-3 group-hover:scale-110 transition-transform"
+                ></i>
+                (19) 99321-7046
+              </a>
+              <a
+                href="#"
+                class="flex items-center justify-center md:justify-start hover:text-vp-yellow transition-colors group"
+              >
+                <i
+                  class="fab fa-instagram text-xl mr-3 group-hover:scale-110 transition-transform"
+                ></i>
+                @vilapet_calegaris
+              </a>
+              <div class="flex items-start justify-center md:justify-start">
+                <i class="fas fa-map-marker-alt text-xl mr-3 mt-1"></i>
+                <span class="text-sm"
+                  >R. Oscar Seixas de Queiroz, 435<br />Jardim Calegaris -
+                  Paulínia/SP</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div
+          class="pt-8 border-t border-white/10 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center"
+        >
+          <p>&copy; 2026 Vila Pet Calegaris. Todos os direitos reservados.</p>
+          <p class="mt-2 md:mt-0">
+            Desenvolvido por @o.calves
+            <i class="fas fa-heart text-vp-teal mx-1"></i>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript logic -->
+    <script>
+      // Navbar Scrolled State
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+          navbar.classList.add("shadow-md");
+          navbar.classList.remove("bg-white/95");
+          navbar.classList.add("bg-white");
+        } else {
+          navbar.classList.remove("shadow-md");
+          navbar.classList.remove("bg-white");
+          navbar.classList.add("bg-white/95");
+        }
+      });
+
+      // Mobile Menu Toggle
+      const btn = document.getElementById("mobile-menu-btn");
+      const menu = document.getElementById("mobile-menu");
+
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu on link click
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menu.classList.add("hidden");
+        });
+      });
+
+      // Form Logic: Toggle Address Field visually appealing
+      function toggleAddress(show) {
+        const addressContainer = document.getElementById("enderecoField");
+        const addressInput = document.getElementById("endereco");
+        const lblSim = document.getElementById("lbl-taxi-sim");
+        const lblNao = document.getElementById("lbl-taxi-nao");
+
+        if (show) {
+          // Styling labels
+          lblSim.classList.add("border-vp-yellow", "bg-vp-yellow-light/20");
+          lblNao.classList.remove("border-vp-teal", "bg-vp-green-light");
+
+          addressContainer.classList.remove("hidden");
+          setTimeout(() => {
+            addressContainer.classList.remove("opacity-0", "h-0", "mt-0");
+            addressContainer.classList.add("opacity-100", "h-auto", "mt-4");
+          }, 10);
+          addressInput.setAttribute("required", "required");
+        } else {
+          // Styling labels
+          lblNao.classList.add("border-vp-teal", "bg-vp-green-light");
+          lblSim.classList.remove("border-vp-yellow", "bg-vp-yellow-light/20");
+
+          addressContainer.classList.remove("opacity-100", "h-auto", "mt-4");
+          addressContainer.classList.add("opacity-0", "h-0", "mt-0");
+          setTimeout(() => {
+            addressContainer.classList.add("hidden");
+          }, 300);
+          addressInput.removeAttribute("required");
+          addressInput.value = "";
+        }
+      }
+
+      // Initialize state
+      toggleAddress(false);
+
+      // WhatsApp Submission Logic
+      function sendToWhatsApp() {
+        const nome = document.getElementById("clienteNome").value.trim();
+        const petNome = document.getElementById("petNome").value.trim();
+        const petPorte = document.getElementById("petPorte").value;
+
+        const checkboxes = document.querySelectorAll(
+          'input[name="servico"]:checked',
+        );
+        let servicos = [];
+        checkboxes.forEach((cb) => {
+          servicos.push(cb.value);
+        });
+
+        const taxiDogReq = document.querySelector(
+          'input[name="taxidog"]:checked',
+        ).value;
+        const endereco = document.getElementById("endereco").value.trim();
+
+        // Validation
+        const errorMsg = document.getElementById("servicoError");
+
+        if (!nome) {
+          alert("Por favor, preencha o seu nome.");
+          document.getElementById("clienteNome").focus();
+          return;
+        }
+        if (!petNome) {
+          alert("Por favor, preencha o nome do pet.");
+          document.getElementById("petNome").focus();
+          return;
+        }
+        if (!petPorte) {
+          alert("Por favor, selecione o porte do pet.");
+          document.getElementById("petPorte").focus();
+          return;
+        }
+
+        if (servicos.length === 0) {
+          errorMsg.classList.remove("hidden");
+          return;
+        } else {
+          errorMsg.classList.add("hidden");
+        }
+
+        if (taxiDogReq === "sim" && !endereco) {
+          alert("Por favor, informe o endereço para o Taxi Dog.");
+          document.getElementById("endereco").focus();
+          return;
+        }
+
+        // Construct Message with emojis for WhatsApp
+        let mensagem = `🐾 *Novo Pedido de Agendamento (Site Vila Pet)* 🐾%0A%0A`;
+        mensagem += `👤 *Tutor:* ${nome}%0A`;
+        mensagem += `🐶 *Pet:* ${petNome} (Porte: ${petPorte})%0A`;
+        mensagem += `🛁 *Serviços:* ${servicos.join(", ")}%0A`;
+        mensagem += `🚖 *Taxi Dog:* ${taxiDogReq === "sim" ? "Sim ✅" : "Não ❌"}%0A`;
+
+        if (taxiDogReq === "sim") {
+          mensagem += `📍 *Endereço:* ${endereco}%0A`;
+        }
+
+        mensagem += `%0A_Olá! Gostaria de verificar a disponibilidade de horários para os serviços acima._`;
+
+        // WhatsApp Number
+        const numeroTelefone = "5519993217046";
+
+        // Open link
+        const url = `https://wa.me/${numeroTelefone}?text=${mensagem}`;
+        window.open(url, "_blank");
+      }
+    </script>
+  </body>
+</html>
