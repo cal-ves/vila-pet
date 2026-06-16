@@ -6,7 +6,6 @@
     <title>Vila Pet Calegaris - Estética Animal</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="src/logo.png" type="image/png" />
     <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
@@ -17,6 +16,10 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="src/logo.png" type="image/png" />
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <script>
       tailwind.config = {
@@ -195,12 +198,15 @@
         class="hero-content text-center px-4 max-w-5xl mx-auto flex flex-col items-center"
       >
         <div
+          data-aos="fade-down"
           class="inline-block mb-6 px-4 py-1.5 rounded-full border border-vp-yellow/30 bg-vp-dark/30 backdrop-blur-sm text-vp-yellow text-sm font-medium tracking-wide uppercase"
         >
           Estética Animal de Excelência
         </div>
 
         <h1
+          data-aos="fade-up"
+          data-aos-delay="100"
           class="font-heading text-5xl md:text-7xl font-semibold text-white mb-6 leading-tight drop-shadow-md"
         >
           O Cuidado que seu <br class="hidden md:block" />
@@ -208,6 +214,8 @@
         </h1>
 
         <p
+          data-aos="fade-up"
+          data-aos-delay="200"
           class="text-lg md:text-2xl text-gray-200 mb-10 max-w-2xl font-light drop-shadow"
         >
           Banho, tosa e muito amor no coração do Jardim Calegaris. Ambiente
@@ -215,6 +223,8 @@
         </p>
 
         <div
+          data-aos="fade-up"
+          data-aos-delay="300"
           class="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto"
         >
           <a
@@ -233,6 +243,8 @@
 
         <!-- Trust badges below hero -->
         <div
+          data-aos="fade-up"
+          data-aos-delay="400"
           class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-white/80 text-sm font-medium"
         >
           <div class="flex items-center justify-center gap-2">
@@ -259,7 +271,7 @@
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8"
       >
-        <div class="md:w-1/2">
+        <div class="md:w-1/2" data-aos="fade-right">
           <h2
             class="font-heading text-3xl md:text-4xl font-semibold mb-4 text-vp-yellow"
           >
@@ -272,7 +284,10 @@
             feliz e relaxado.
           </p>
         </div>
-        <div class="md:w-1/2 flex justify-center md:justify-end">
+        <div
+          class="md:w-1/2 flex justify-center md:justify-end"
+          data-aos="fade-left"
+        >
           <!-- Using the facade image in a stylized way -->
           <div
             class="w-64 h-64 blob-shape border-4 border-vp-yellow/50 shadow-2xl overflow-hidden relative"
@@ -290,7 +305,7 @@
     <!-- Services Section -->
     <section id="servicos" class="py-24 bg-[#fafafa]">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
           <h4
             class="text-vp-gold-dark font-bold tracking-wider uppercase text-sm mb-2"
           >
@@ -310,6 +325,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <!-- Service Card 1 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="100"
             class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
           >
             <div
@@ -334,6 +351,8 @@
 
           <!-- Service Card 2 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="200"
             class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
           >
             <div
@@ -371,6 +390,8 @@
 
           <!-- Service Card 3 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="300"
             class="bg-white p-10 rounded-[2rem] shadow-soft hover:shadow-floating transition-all duration-300 border border-gray-100 group relative overflow-hidden"
           >
             <div
@@ -405,6 +426,8 @@
 
         <!-- Promotion Banner -->
         <div
+          data-aos="zoom-in"
+          data-aos-delay="400"
           class="mt-20 bg-vp-teal rounded-[2rem] overflow-hidden shadow-floating relative"
         >
           <!-- Background Pattern -->
@@ -497,7 +520,7 @@
       ></div>
 
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 max-w-3xl mx-auto">
+        <div class="text-center mb-16 max-w-3xl mx-auto" data-aos="fade-up">
           <h4
             class="text-vp-teal font-bold tracking-wider uppercase text-sm mb-2"
           >
@@ -517,6 +540,8 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Card Imagem 1 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="100"
             class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
           >
             <img
@@ -539,6 +564,8 @@
 
           <!-- Card Imagem 2 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="200"
             class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
           >
             <img
@@ -561,6 +588,8 @@
 
           <!-- Card Imagem 3 -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="300"
             class="relative group overflow-hidden rounded-[2rem] shadow-md h-96 lg:h-[450px]"
           >
             <img
@@ -583,6 +612,8 @@
 
           <!-- Bloco de Higiene Ocupando as 3 Colunas Abaixo -->
           <div
+            data-aos="fade-up"
+            data-aos-delay="400"
             class="md:col-span-3 bg-white rounded-[2rem] shadow-md p-8 md:p-12 flex flex-col md:flex-row items-center border border-gray-100 mt-4 gap-8 hover:shadow-lg transition-shadow"
           >
             <div
@@ -616,7 +647,7 @@
     <!-- Booking Form Section -->
     <section id="agendamento" class="py-24 bg-[#fafafa]">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
+        <div class="text-center mb-16" data-aos="fade-up">
           <h2
             class="font-heading text-4xl md:text-5xl font-semibold text-vp-dark mb-4"
           >
@@ -633,6 +664,7 @@
         >
           <!-- Left side Info Panel -->
           <div
+            data-aos="fade-right"
             class="bg-vp-teal relative overflow-hidden lg:w-2/5 p-10 md:p-14 flex flex-col justify-between text-white"
           >
             <!-- Decor abstract shapes -->
@@ -718,7 +750,7 @@
           </div>
 
           <!-- Right side Form -->
-          <div class="p-10 md:p-14 lg:w-3/5 bg-white">
+          <div data-aos="fade-left" class="p-10 md:p-14 lg:w-3/5 bg-white">
             <form id="whatsappForm" class="space-y-6">
               <!-- Client & Pet Info -->
               <div class="space-y-6">
@@ -1075,10 +1107,7 @@
           class="pt-8 border-t border-white/10 text-center text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center"
         >
           <p>&copy; 2026 Vila Pet Calegaris. Todos os direitos reservados.</p>
-          <p class="mt-2 md:mt-0">
-            Desenvolvido por @o.calves
-            <i class="fas fa-heart text-vp-teal mx-1"></i>
-          </p>
+          <p class="mt-2 md:mt-0">Desenvolvido por @o.calves</p>
         </div>
       </div>
     </footer>
@@ -1221,6 +1250,16 @@
         const url = `https://wa.me/${numeroTelefone}?text=${mensagem}`;
         window.open(url, "_blank");
       }
+    </script>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // duração padrão das animações
+        once: true, // animar apenas uma vez ao rolar para baixo
+        offset: 80, // distância de scroll antes de ativar a animação
+      });
     </script>
   </body>
 </html>
