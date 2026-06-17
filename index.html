@@ -51,10 +51,12 @@
       /* Custom styles for smooth scrolling and minor tweaks */
       html {
         scroll-behavior: smooth;
+        overflow-x: hidden; /* evita rolagem horizontal indesejada em telas estreitas */
       }
 
       body {
         background-color: #fafafa; /* Very light neutral bg */
+        overflow-x: hidden;
       }
 
       .hero-bg {
@@ -62,6 +64,17 @@
         background-image: url("src/cachorro.jpeg");
         background-size: cover;
         background-position: center 10%;
+        min-height: 100vh; /* fallback para navegadores antigos */
+      }
+
+      /* Em navegadores que suportam dvh, usamos a altura "dinâmica" real da
+         viewport. Isso evita que a seção quebre/corte quando a barra de
+         endereço do navegador (Chrome/Safari/Instagram in-app) aparece e
+         desaparece — comportamento que varia bastante entre celulares. */
+      @supports (height: 100dvh) {
+        .hero-bg {
+          min-height: 100dvh;
+        }
       }
 
       @media (min-width: 1024px) {
@@ -211,7 +224,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-bg min-h-screen flex items-center justify-center pt-24">
+    <header class="hero-bg flex items-center justify-center pt-24">
       <div class="hero-overlay"></div>
       <div
         class="hero-content text-center px-4 max-w-5xl mx-auto flex flex-col items-center"
@@ -1494,6 +1507,21 @@
         once: true, // animar apenas uma vez ao rolar para baixo
         offset: 80, // distância de scroll antes de ativar a animação
       });
+    </script>
+
+    <!-- Fallback de segurança para o AOS -->
+    <!-- Em alguns celulares/redes, o CDN externo do AOS (unpkg.com) pode
+         carregar lento, falhar ou ser bloqueado. Como os elementos com
+         data-aos ficam com opacity:0 até o AOS rodar, isso fazia a hero
+         section (e outras seções) "quebrar" parecendo vazia. Este script
+         garante que, no máximo após 2.5s, todo o conteúdo apareça mesmo
+         que o AOS não tenha carregado. -->
+    <script>
+      setTimeout(function () {
+        document.querySelectorAll("[data-aos]").forEach(function (el) {
+          el.classList.add("aos-animate");
+        });
+      }, 2500);
     </script>
   </body>
 </html>
